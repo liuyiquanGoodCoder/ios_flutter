@@ -1,7 +1,6 @@
 import 'global.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:async';
 import 'package:intl/intl.dart';
 class NotificationViewPage extends StatefulWidget {
   @override createState() => NotificationViewState();
