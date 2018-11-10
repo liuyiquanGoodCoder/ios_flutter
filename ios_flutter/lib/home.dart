@@ -103,8 +103,7 @@ class HomeState extends State {
               ],
             ),
             color: Colors.pink ,
-            onPressed:
-                () => Navigator.pushNamed(context, '/notificationDiscussion'),
+            onPressed: () => Fluttertoast.showToast(msg: 'Notifications'),
           ),
           FlatButton(
             child: Column(

@@ -4,8 +4,6 @@ import 'notification_list.dart';
 import 'notification_view.dart';
 import 'global.dart';
 import 'notification_create.dart';
-import 'notification_remind.dart';
-import 'notification_discussion.dart';
 
 
 
@@ -31,10 +29,6 @@ class MyApp extends StatelessWidget {
             (BuildContext context) => NotificationListPage(),
         '/notificationView':
             (BuildContext context) => NotificationViewPage(),
-        '/notificationRemind':
-            (BuildContext context) => NotificationRemind(),
-        '/notificationDiscussion':
-            (BuildContext context) => NotificationDiscussion(),
       },
     );
   }

@@ -94,7 +94,7 @@ class NotificationListState extends State {
       floatingActionButton: (canCreate)?
       FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: ()=>Navigator.pushNamed(context, '/notificationRemind'),
+        onPressed: ()=>Navigator.pushNamed(context, '/notificationCreate'),
       ) : null,
 
 

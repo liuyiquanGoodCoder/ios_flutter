@@ -6,4 +6,3 @@ COMP7510 project.
 
 For help getting started with Flutter, view our online
 [documentation](https://flutter.io/).
-# ios_flutter
