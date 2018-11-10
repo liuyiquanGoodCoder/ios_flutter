@@ -138,7 +138,7 @@ class HomeState extends State {
             ),
             color: Colors.orange,
             onPressed:
-                () => Navigator.pushNamed(context, '/notificationList'),
+                () => Navigator.pushNamed(context, '/NotificationFavorite'),
           ),
 
 

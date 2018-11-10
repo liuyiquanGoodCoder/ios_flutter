@@ -9,8 +9,7 @@ class NotificationCreationPage extends StatefulWidget {
 class NotificationCreationState extends State {
 
   var images = [];
-
-  var selectedCourse = roles.keys.first;
+  var selectedCourse = "administrator";
   var title = '';
   var content = '';
 
@@ -27,11 +26,11 @@ class NotificationCreationState extends State {
   Widget build(BuildContext context) {
 
     var items = <DropdownMenuItem>[];
-    for (var k in roles.keys) {
-      var v = roles[k];
-      if (['teacher', 'administrator'].contains(v))
-        items.add(DropdownMenuItem(value: k, child: Text(k)));
-    }
+
+        items.add(DropdownMenuItem(value: "administrator", child: Text("administrator")));
+        items.add(DropdownMenuItem(value: "teacher", child: Text("favorite")));
+        items.add(DropdownMenuItem(value: "ALL", child: Text("男装")));
+
     var ddButton = DropdownButton(
       value: selectedCourse,
       items: items,

@@ -4,6 +4,7 @@ import 'notification_list.dart';
 import 'notification_view.dart';
 import 'global.dart';
 import 'notification_create.dart';
+import 'notification_favorite.dart';
 
 
 
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
             (BuildContext context) => NotificationListPage(),
         '/notificationView':
             (BuildContext context) => NotificationViewPage(),
+        '/NotificationFavorite':
+            (BuildContext context) => NotificationFavorite(),
       },
     );
   }

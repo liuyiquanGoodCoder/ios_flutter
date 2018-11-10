@@ -53,11 +53,10 @@ class NotificationViewState extends State {
       ),
       persistentFooterButtons: <Widget>[
         Text('$createdAt by $createdBy'),
-        (['teacher', 'administrator'].contains(roles[course]))?
         IconButton(
           icon: Icon(Icons.delete_forever),
           onPressed: () => delete(),
-        ):null,
+        ),
       ],
     );
   }

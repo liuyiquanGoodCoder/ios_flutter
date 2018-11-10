@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'global.dart';
 import 'package:intl/intl.dart';
 
-class NotificationListPage extends StatefulWidget {
+class NotificationFavorite extends StatefulWidget {
   @override createState() => NotificationListState();
 }
 class NotificationListState extends State {
@@ -31,7 +31,7 @@ class NotificationListState extends State {
    // canCreate = roleSet.contains('teacher') null
       //  || roleSet.contains('administrator');
     for (var c in courseSet) {
-      var nRef = dbRef.child('courses/$c/notifications');
+      var nRef = dbRef.child('courses/teacher/notifications');
       nRef.onValue.listen((event) {
         if (event.snapshot.value == null) nMap.remove(c);
         else nMap[c] = (event.snapshot.value as Map).values.toList();
