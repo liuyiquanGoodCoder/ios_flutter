@@ -77,7 +77,7 @@ class HomeState extends State {
               children: <Widget>[
                 Icon(Icons.notifications, size: 48.0, color: Colors.white,),
 
-                Text('Remind Me',
+                Text('Notification',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20.0, color: Colors.white),
                 ),
@@ -103,7 +103,7 @@ class HomeState extends State {
               ],
             ),
             color: Colors.pink ,
-            onPressed: () => Fluttertoast.showToast(msg: 'Notifications'),
+            onPressed: () =>  Navigator.pushNamed(context, '/discussion'),
           ),
           FlatButton(
             child: Column(

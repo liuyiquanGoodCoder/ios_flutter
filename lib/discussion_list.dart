@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'global.dart';
 import 'package:intl/intl.dart';
 
-class NotificationListPage extends StatefulWidget {
+class discussionListPage extends StatefulWidget {
   @override createState() => NotificationListState();
 }
 class NotificationListState extends State {
@@ -22,24 +22,20 @@ class NotificationListState extends State {
     Set roleSet, courseSet;
     if (roles != null) {
       roleSet = roles.values.toSet();
-      courseSet = roles.keys.toSet();
+      //courseSet = roles.keys.toSet();
     } else {
       roleSet = Set();
-      courseSet = Set();
+      //courseSet = Set();
     }
-    courseSet.add('male');
-    courseSet.add('female');
+//    courseSet.add('male');
+//    courseSet.add('female');
    // canCreate = roleSet.contains('teacher') null
       //  || roleSet.contains('administrator');
     for (var c in courseSet) {
-      var nRef = dbRef.child('information/$c/notifications');
+      var nRef = dbRef.child('Discussion/');
       nRef.onValue.listen((event) {
-        if (event.snapshot.value == null) nMap.remove(c);
-        else nMap[c] = (event.snapshot.value as Map).values.toList();
-        if (mounted) setState(() {});
+         nMap[c] = (event.snapshot.value as Map).values.toList();
       });
-
-      print(c);
     }
   }
 
@@ -58,7 +54,7 @@ class NotificationListState extends State {
     for (var i=0; i<data.length; i++){
       var item = data[i];
       var title = item['title'];
-      var course = item['gender'];
+     // var course = item['gender'];
       var datetime = DateTime.fromMillisecondsSinceEpoch(item['createdAt']);
       var createdAt = DateFormat('EEE, MMMM d, y H:m:s',
           'en_US').format(datetime);
@@ -77,14 +73,14 @@ class NotificationListState extends State {
                     style: TextStyle(fontSize: 10.0, color: Colors.blueGrey),),
                 ],
               ),
-              trailing: Text(course.replaceAll(' ', '\n'),
-                textAlign: TextAlign.right,),
+//              trailing: Text(course.replaceAll(' ', '\n'),
+//                textAlign: TextAlign.right,),
 
               onTap: () {
 
 
                   notificationSelection = item;
-                Navigator.pushNamed(context, '/notificationView');
+                Navigator.pushNamed(context, '/discussionView');
               }
 
 
@@ -92,11 +88,11 @@ class NotificationListState extends State {
       );
     }
     return Scaffold(
-      floatingActionButton: (canCreate)? FloatingActionButton(child: Icon(Icons.add), onPressed: ()=>Navigator.pushNamed(context, '/notificationCreate'),
+      floatingActionButton: (canCreate)? FloatingActionButton(child: Icon(Icons.add), onPressed: ()=>Navigator.pushNamed(context, '/discussionCreate'),
       ) : null,
 
 
-      appBar: AppBar(title: Text('Notifications'),),
+      appBar: AppBar(title: Text('Discussion'),),
       body: ListView(
         children: widgetList,
         padding: EdgeInsets.all(20.0),

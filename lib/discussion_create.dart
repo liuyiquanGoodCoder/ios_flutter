@@ -2,14 +2,14 @@ import 'global.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class NotificationCreationPage extends StatefulWidget {
+class DiscussionCreationPage extends StatefulWidget {
   @override createState() => NotificationCreationState();
 }
 
 class NotificationCreationState extends State {
 
   var images = [];
-  var gender = "male";
+ // var gender = "male";
   var title = '';
   var content = '';
 
@@ -24,22 +24,22 @@ class NotificationCreationState extends State {
 
   @override
   Widget build(BuildContext context) {
-
-    var items = <DropdownMenuItem>[];
-
-        items.add(DropdownMenuItem(value: "male", child: Text("male")));
-        items.add(DropdownMenuItem(value: "female", child: Text("female")));
-
-    var ddButton = DropdownButton(
-      value: gender,
-      items: items,
-      onChanged: (course) => setState(() => gender = course),
-    );
+//
+//    var items = <DropdownMenuItem>[];
+//
+//        items.add(DropdownMenuItem(value: "male", child: Text("male")));
+//        items.add(DropdownMenuItem(value: "female", child: Text("female")));
+//
+//    var ddButton = DropdownButton(
+//      value: gender,
+//      items: items,
+//      onChanged: (course) => setState(() => gender = course),
+//    );
 
 
     var widgets = <Widget>[
       Text('Post to'),
-      ddButton,
+      //ddButton,
       TextField(
         decoration: InputDecoration(hintText: 'Title',),
         onChanged: (text) => setState(() => title = text),
@@ -73,7 +73,7 @@ class NotificationCreationState extends State {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Compose Notification'),
+        title: Text('Add Discussion'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.camera_alt),
@@ -100,10 +100,10 @@ class NotificationCreationState extends State {
   }
 
   void post() {
-    var ref = dbRef.child('information/$gender/notifications').push();
+    var ref = dbRef.child('Discussion/').push();
     ref.set({
       'key' : ref.key,
-      'gender' : gender,
+     // 'gender' : gender,
       'title' : title,
       'content' : content,
       'createdAt' : DateTime.now().millisecondsSinceEpoch,

@@ -2,7 +2,7 @@ import 'global.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-class NotificationViewPage extends StatefulWidget {
+class DiscussionViewPage extends StatefulWidget {
   @override createState() => NotificationViewState();
 }
 class NotificationViewState extends State {
