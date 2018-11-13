@@ -1,6 +1,6 @@
-# reach
+# ios_flutter
 
-COMP7510 project.
+Flutter
 
 ## Getting Started first
 
