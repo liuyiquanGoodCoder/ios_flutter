@@ -8,7 +8,7 @@ class NotificationListPage extends StatefulWidget {
 }
 class NotificationListState extends State {
 
-  var canCreate = true;
+  var canCreate = false;
   var nMap = {};
 
   @override
@@ -27,12 +27,11 @@ class NotificationListState extends State {
       roleSet = Set();
       courseSet = Set();
     }
-    courseSet.add('male');
-    courseSet.add('female');
-   // canCreate = roleSet.contains('teacher') null
-      //  || roleSet.contains('administrator');
+    courseSet.add('administrator');
+    canCreate = roleSet.contains('teacher')
+        || roleSet.contains('administrator');
     for (var c in courseSet) {
-      var nRef = dbRef.child('information/$c/notifications');
+      var nRef = dbRef.child('courses/$c/notifications');
       nRef.onValue.listen((event) {
         if (event.snapshot.value == null) nMap.remove(c);
         else nMap[c] = (event.snapshot.value as Map).values.toList();
@@ -58,7 +57,7 @@ class NotificationListState extends State {
     for (var i=0; i<data.length; i++){
       var item = data[i];
       var title = item['title'];
-      var course = item['gender'];
+      var course = item['course'];
       var datetime = DateTime.fromMillisecondsSinceEpoch(item['createdAt']);
       var createdAt = DateFormat('EEE, MMMM d, y H:m:s',
           'en_US').format(datetime);
@@ -92,7 +91,10 @@ class NotificationListState extends State {
       );
     }
     return Scaffold(
-      floatingActionButton: (canCreate)? FloatingActionButton(child: Icon(Icons.add), onPressed: ()=>Navigator.pushNamed(context, '/notificationCreate'),
+      floatingActionButton: (canCreate)?
+      FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: ()=>Navigator.pushNamed(context, '/notificationCreate'),
       ) : null,
 
 

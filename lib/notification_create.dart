@@ -9,7 +9,8 @@ class NotificationCreationPage extends StatefulWidget {
 class NotificationCreationState extends State {
 
   var images = [];
-  var gender = "male";
+
+  var selectedCourse = roles.keys.first;
   var title = '';
   var content = '';
 
@@ -26,14 +27,15 @@ class NotificationCreationState extends State {
   Widget build(BuildContext context) {
 
     var items = <DropdownMenuItem>[];
-
-        items.add(DropdownMenuItem(value: "male", child: Text("male")));
-        items.add(DropdownMenuItem(value: "female", child: Text("female")));
-
+    for (var k in roles.keys) {
+      var v = roles[k];
+      if (['teacher', 'administrator'].contains(v))
+        items.add(DropdownMenuItem(value: k, child: Text(k)));
+    }
     var ddButton = DropdownButton(
-      value: gender,
+      value: selectedCourse,
       items: items,
-      onChanged: (course) => setState(() => gender = course),
+      onChanged: (course) => setState(() => selectedCourse = course),
     );
 
 
@@ -100,10 +102,10 @@ class NotificationCreationState extends State {
   }
 
   void post() {
-    var ref = dbRef.child('information/$gender/notifications').push();
+    var ref = dbRef.child('courses/$selectedCourse/notifications').push();
     ref.set({
       'key' : ref.key,
-      'gender' : gender,
+      'course' : selectedCourse,
       'title' : title,
       'content' : content,
       'createdAt' : DateTime.now().millisecondsSinceEpoch,

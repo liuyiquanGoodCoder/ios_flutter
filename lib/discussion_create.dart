@@ -9,7 +9,7 @@ class DiscussionCreationPage extends StatefulWidget {
 class NotificationCreationState extends State {
 
   var images = [];
- // var gender = "male";
+  var discussion = "Discussion";
   var title = '';
   var content = '';
 
@@ -100,7 +100,7 @@ class NotificationCreationState extends State {
   }
 
   void post() {
-    var ref = dbRef.child('Discussion/').push();
+    var ref = dbRef.child('Discussion/$discussion/notifications').push();
     ref.set({
       'key' : ref.key,
      // 'gender' : gender,
@@ -108,6 +108,7 @@ class NotificationCreationState extends State {
       'content' : content,
       'createdAt' : DateTime.now().millisecondsSinceEpoch,
       'createdBy' : userID,
+      'discussion':discussion,
     });
 
     for (var i=0; i < images.length; i++) {

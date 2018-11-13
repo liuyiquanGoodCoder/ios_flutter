@@ -23,13 +23,13 @@ class NotificationViewState extends State {
   Widget build(BuildContext context) {
     var data = notificationSelection;
     var title = data['title'];
-    var course = data['gender'];
+    //var course = data['gender'];
     var content = data['content'];
     var createdBy = data['createdBy'];
     var datetime = DateTime.fromMillisecondsSinceEpoch(data['createdAt']);
     var createdAt = DateFormat('EEE, MMMM d, y H:m:s', 'en_US').format(datetime);
     var childWidgets = <Widget>[
-      Text(course, style: TextStyle(color: Colors.blue),),
+      //Text(course, style: TextStyle(color: Colors.blue),),
       Divider(color: Colors.transparent,),
       Text(content),
     ];
@@ -61,8 +61,8 @@ class NotificationViewState extends State {
   }
   void delete() {
     var key = notificationSelection['key'];
-    var course = notificationSelection['course'];
-    dbRef.child('courses/$course/notifications/$key').remove();
+    //var course = notificationSelection['course'];
+    dbRef.child('Discussion/Discussion/notifications/$key').remove();
     for (var i = 0; i < images.length; i++)
       storageRef.child('$key/$i').delete();
     Navigator.pop(context);

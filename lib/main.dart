@@ -7,6 +7,7 @@ import 'notification_create.dart';
 import 'notification_favorite.dart';
 import 'discussion_list.dart';
 import 'discussion_create.dart';
+import 'discussion_view.dart';
 
 
 
@@ -38,6 +39,8 @@ class MyApp extends StatelessWidget {
             (BuildContext context) => NotificationFavorite(),
         '/discussion':
             (BuildContext context) => discussionListPage(),
+        '/discussionView':
+            (BuildContext context) => DiscussionViewPage(),
       },
     );
   }

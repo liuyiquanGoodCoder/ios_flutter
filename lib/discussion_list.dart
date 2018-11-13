@@ -22,20 +22,24 @@ class NotificationListState extends State {
     Set roleSet, courseSet;
     if (roles != null) {
       roleSet = roles.values.toSet();
-      //courseSet = roles.keys.toSet();
+      courseSet = roles.keys.toSet();
     } else {
       roleSet = Set();
-      //courseSet = Set();
+      courseSet = Set();
     }
-//    courseSet.add('male');
-//    courseSet.add('female');
-   // canCreate = roleSet.contains('teacher') null
-      //  || roleSet.contains('administrator');
+    //courseSet.add('male');
+    courseSet.add('Discussion');
+    // canCreate = roleSet.contains('teacher') null
+    //  || roleSet.contains('administrator');
     for (var c in courseSet) {
-      var nRef = dbRef.child('Discussion/');
+      var nRef = dbRef.child('Discussion/$c/notifications');
       nRef.onValue.listen((event) {
-         nMap[c] = (event.snapshot.value as Map).values.toList();
+        if (event.snapshot.value == null) nMap.remove(c);
+        else nMap[c] = (event.snapshot.value as Map).values.toList();
+        if (mounted) setState(() {});
       });
+
+      print(c);
     }
   }
 
@@ -54,7 +58,7 @@ class NotificationListState extends State {
     for (var i=0; i<data.length; i++){
       var item = data[i];
       var title = item['title'];
-     // var course = item['gender'];
+      var course = item['gender'];
       var datetime = DateTime.fromMillisecondsSinceEpoch(item['createdAt']);
       var createdAt = DateFormat('EEE, MMMM d, y H:m:s',
           'en_US').format(datetime);
@@ -62,7 +66,7 @@ class NotificationListState extends State {
 
       widgetList.add(
           ListTile(
-            leading: Icon(Icons.notifications),
+              leading: Icon(Icons.notifications),
 // title: Text('Item $i'),
 // trailing: Icon(Icons.face),
               title: Column(
@@ -79,7 +83,7 @@ class NotificationListState extends State {
               onTap: () {
 
 
-                  notificationSelection = item;
+                notificationSelection = item;
                 Navigator.pushNamed(context, '/discussionView');
               }
 
@@ -92,7 +96,7 @@ class NotificationListState extends State {
       ) : null,
 
 
-      appBar: AppBar(title: Text('Discussion'),),
+      appBar: AppBar(title: Text('Notifications'),),
       body: ListView(
         children: widgetList,
         padding: EdgeInsets.all(20.0),

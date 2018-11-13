@@ -1,12 +1,14 @@
 import 'global.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:async';
 import 'package:intl/intl.dart';
 class NotificationViewPage extends StatefulWidget {
   @override createState() => NotificationViewState();
 }
 class NotificationViewState extends State {
   var images = [];
+  var canDelete = false;
   @override
   void initState() {
     super.initState();
@@ -23,11 +25,19 @@ class NotificationViewState extends State {
   Widget build(BuildContext context) {
     var data = notificationSelection;
     var title = data['title'];
-    var course = data['gender'];
+    var course = data['course'];
     var content = data['content'];
     var createdBy = data['createdBy'];
     var datetime = DateTime.fromMillisecondsSinceEpoch(data['createdAt']);
     var createdAt = DateFormat('EEE, MMMM d, y H:m:s', 'en_US').format(datetime);
+    Set roleSet;
+    if (roles != null) {
+      roleSet = roles.values.toSet();
+    } else {
+      roleSet = Set();
+    }
+    canDelete = roleSet.contains('teacher')
+        || roleSet.contains('administrator');
     var childWidgets = <Widget>[
       Text(course, style: TextStyle(color: Colors.blue),),
       Divider(color: Colors.transparent,),
@@ -52,10 +62,11 @@ class NotificationViewState extends State {
       ),
       persistentFooterButtons: <Widget>[
         Text('$createdAt by $createdBy'),
+        (canDelete)?
         IconButton(
           icon: Icon(Icons.delete_forever),
           onPressed: () => delete(),
-        ),
+        ):null,
       ],
     );
   }
