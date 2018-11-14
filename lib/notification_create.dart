@@ -28,15 +28,15 @@ class NotificationCreationState extends State {
 
     var items = <DropdownMenuItem>[];
     for (var k in roles.keys) {
-      var v = roles[k];
-      if (['teacher', 'administrator'].contains(v))
-        items.add(DropdownMenuItem(value: k, child: Text(k)));
+      //var v = roles[k];
+      //if (['ALL', 'COMP 7510'].contains(v))
+      items.add(DropdownMenuItem(value: k, child: Text(k)));
     }
-    var ddButton = DropdownButton(
+   var ddButton = DropdownButton(
       value: selectedCourse,
       items: items,
       onChanged: (course) => setState(() => selectedCourse = course),
-    );
+   );
 
 
     var widgets = <Widget>[

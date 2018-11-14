@@ -14,6 +14,7 @@ class NotificationListState extends State {
   @override
   void initState() {
     super.initState();
+    //getUsers().then((_) => getNotificationList());
     getRoles().then((_) => getNotificationList());
   }
 
@@ -27,7 +28,9 @@ class NotificationListState extends State {
       roleSet = Set();
       courseSet = Set();
     }
-    courseSet.add('administrator');
+    courseSet.add('ALL');
+    courseSet.add('COMP 7510');
+    courseSet.add('teacher');
     canCreate = roleSet.contains('teacher')
         || roleSet.contains('administrator');
     for (var c in courseSet) {

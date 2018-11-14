@@ -14,12 +14,11 @@ class NotificationCreationState extends State {
   var content = '';
 
   void attach(source) {
-    ImagePicker.pickImage(source: source).then((file){
+    ImagePicker.pickImage(source: source).then((file) {
       if (file != null)
         setState(() => images.add(file));
     });
   }
-
 
 
   @override
@@ -53,7 +52,10 @@ class NotificationCreationState extends State {
       ),
     ];
 
-    var width = MediaQuery.of(context).size.width - 120;
+    var width = MediaQuery
+        .of(context)
+        .size
+        .width - 120;
 
     for (var f in images) {
       widgets.add(Divider(color: Colors.transparent,));
@@ -93,37 +95,60 @@ class NotificationCreationState extends State {
         children: <Widget>[Column(children: widgets)],
       ),
     );
-
-
-
-
   }
 
   void post() {
     var ref = dbRef.child('Discussion/$discussion/notifications').push();
     ref.set({
-      'key' : ref.key,
-     // 'gender' : gender,
-      'title' : title,
-      'content' : content,
-      'createdAt' : DateTime.now().millisecondsSinceEpoch,
-      'createdBy' : userID,
-      'discussion':discussion,
+      'key': ref.key,
+      // 'gender' : gender,
+      'title': title,
+      'content': content,
+      'createdAt': DateTime
+          .now()
+          .millisecondsSinceEpoch,
+      'createdBy': userID,
+      'discussion': discussion,
     });
 
-    for (var i=0; i < images.length; i++) {
+    for (var i = 0; i < images.length; i++) {
       var fRef = storageRef.child(ref.key + '/$i');
       var task = fRef.putFile(images[i]);
       task.future.then((snapshot) =>
           ref.child('images/$i').set(snapshot.downloadUrl.toString())
       );
     }
+    var users = dbRef.child('usersdiscussion/$userID/$discussion/notifications').push();
+    var users1 = dbRef.child('users/18428096/roles/$userID').push();
 
+    users.set({
+      'key': users.key,
+      //'course' : selectedCourse,
+      'title': title,
+      'content': content,
+      'createdAt': DateTime
+          .now()
+          .millisecondsSinceEpoch,
+      'createdBy': userID,
+    });
+    users1.set({
+      userID: userID,
+      'createdBy': userID,
+    });
+
+
+    for (var i = 0; i < images.length; i++) {
+      var uRef = storageRef.child(users.key + '/$i');
+      var task1 = uRef.putFile(images[i]);
+      task1.future.then((snapshot) =>
+          users.child('images/$i').set(snapshot.downloadUrl.toString())
+
+      );
+    }
 
 
     Navigator.pop(context);
   }
-
-
-
 }
+
+

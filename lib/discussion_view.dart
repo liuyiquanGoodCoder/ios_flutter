@@ -61,8 +61,11 @@ class NotificationViewState extends State {
   }
   void delete() {
     var key = notificationSelection['key'];
-    //var course = notificationSelection['course'];
     dbRef.child('Discussion/Discussion/notifications/$key').remove();
+    dbRef.child('usersdiscussion/$userID/Discussion/notifications/$key').remove();
+
+
+
     for (var i = 0; i < images.length; i++)
       storageRef.child('$key/$i').delete();
     Navigator.pop(context);

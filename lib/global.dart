@@ -19,6 +19,7 @@ DatabaseReference dbRef;
 StorageReference storageRef;
 String userID;
 Map roles;
+Map users;
 
 void firebaseInit() {
   var firebaseApp = FirebaseApp.instance;
@@ -64,4 +65,11 @@ Future<void> getRoles() async {
   var rolesRef = dbRef.child('users/$userID/roles');
   var snapshot = await rolesRef.once();
   roles = snapshot.value as Map;
+  //users = snapshot.value as Map;
+}
+
+Future<void> getUsers() async {
+  var rolesRef = dbRef.child('users/$userID/roles');
+  var snapshot = await rolesRef.once();
+  users = snapshot.value as Map;
 }

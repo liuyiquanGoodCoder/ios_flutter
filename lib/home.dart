@@ -129,7 +129,7 @@ class HomeState extends State {
               children: <Widget>[
                 Icon(Icons.add_shopping_cart, size: 48.0, color: Colors.white,),
 
-                Text('Shopping Trolley',
+                Text('Personal',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20.0, color: Colors.white),
                 ),
@@ -138,7 +138,7 @@ class HomeState extends State {
             ),
             color: Colors.orange,
             onPressed:
-                () => Navigator.pushNamed(context, '/NotificationFavorite'),
+                () => Navigator.pushNamed(context, '/personalList'),
           ),
 
 

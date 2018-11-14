@@ -27,17 +27,18 @@ class NotificationListState extends State {
       roleSet = Set();
       courseSet = Set();
     }
-    //courseSet.add('male');
-    courseSet.add('Discussion');
-    // canCreate = roleSet.contains('teacher') null
-    //  || roleSet.contains('administrator');
-    for (var c in courseSet) {
-      var nRef = dbRef.child('Discussion/$c/notifications');
-      nRef.onValue.listen((event) {
-        if (event.snapshot.value == null) nMap.remove(c);
-        else nMap[c] = (event.snapshot.value as Map).values.toList();
-        if (mounted) setState(() {});
-      });
+    courseSet.add('18446396');
+    //courseSet.add('18414850');
+      for (var c in users.keys) {
+        //var id = roles[c];
+        var nRef = dbRef.child('usersdiscussion/$c/Discussion/notifications');
+        nRef.onValue.listen((event) {
+          if (event.snapshot.value == null) nMap.remove(c);
+          else nMap[c] = (event.snapshot.value as Map).values.toList();
+          if (mounted) setState(() {});
+        });
+
+
 
       print(c);
     }
@@ -92,8 +93,8 @@ class NotificationListState extends State {
       );
     }
     return Scaffold(
-      floatingActionButton: (canCreate)? FloatingActionButton(child: Icon(Icons.add), onPressed: ()=>Navigator.pushNamed(context, '/discussionCreate'),
-      ) : null,
+      //floatingActionButton: (canCreate)? FloatingActionButton(child: Icon(Icons.add), onPressed: ()=>Navigator.pushNamed(context, '/discussionCreate'),
+      //) : null,
 
 
       appBar: AppBar(title: Text('Notifications'),),
