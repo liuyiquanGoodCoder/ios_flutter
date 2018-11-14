@@ -23,19 +23,6 @@ class NotificationCreationState extends State {
 
   @override
   Widget build(BuildContext context) {
-//
-//    var items = <DropdownMenuItem>[];
-//
-//        items.add(DropdownMenuItem(value: "male", child: Text("male")));
-//        items.add(DropdownMenuItem(value: "female", child: Text("female")));
-//
-//    var ddButton = DropdownButton(
-//      value: gender,
-//      items: items,
-//      onChanged: (course) => setState(() => gender = course),
-//    );
-
-
     var widgets = <Widget>[
       Text('Post to'),
       //ddButton,
@@ -75,7 +62,9 @@ class NotificationCreationState extends State {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Discussion'),
+        backgroundColor: Colors.amberAccent,
+        title: Text('Add',style:TextStyle(fontSize: 35.0,color:Colors.black,
+          fontFamily: 'marker felt',)),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.camera_alt),
@@ -119,7 +108,6 @@ class NotificationCreationState extends State {
       );
     }
     var users = dbRef.child('usersdiscussion/$userID/$discussion/notifications').push();
-    var users1 = dbRef.child('users/18428096/roles/$userID').push();
 
     users.set({
       'key': users.key,
@@ -131,11 +119,6 @@ class NotificationCreationState extends State {
           .millisecondsSinceEpoch,
       'createdBy': userID,
     });
-    users1.set({
-      userID: userID,
-      'createdBy': userID,
-    });
-
 
     for (var i = 0; i < images.length; i++) {
       var uRef = storageRef.child(users.key + '/$i');

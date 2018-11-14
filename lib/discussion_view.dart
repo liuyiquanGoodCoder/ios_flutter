@@ -7,6 +7,7 @@ class DiscussionViewPage extends StatefulWidget {
 }
 class NotificationViewState extends State {
   var images = [];
+  var canDelete = false;
   @override
   void initState() {
     super.initState();
@@ -28,8 +29,16 @@ class NotificationViewState extends State {
     var createdBy = data['createdBy'];
     var datetime = DateTime.fromMillisecondsSinceEpoch(data['createdAt']);
     var createdAt = DateFormat('EEE, MMMM d, y H:m:s', 'en_US').format(datetime);
+    Set roleSet;
+    if (roles != null) {
+      roleSet = roles.values.toSet();
+    } else {
+      roleSet = Set();
+    }
+    canDelete = roleSet.contains('teacher')
+        || roleSet.contains('administrator');
     var childWidgets = <Widget>[
-      //Text(course, style: TextStyle(color: Colors.blue),),
+
       Divider(color: Colors.transparent,),
       Text(content),
     ];
@@ -40,8 +49,9 @@ class NotificationViewState extends State {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
-      ),
+        title: Text(title,style:TextStyle(fontSize: 35.0,color:Colors.black,
+      fontFamily: 'marker felt',),),backgroundColor: Colors.amberAccent,),
+
       body: ListView(
         padding: EdgeInsets.all(20.0),
         children: <Widget>[
@@ -52,17 +62,19 @@ class NotificationViewState extends State {
       ),
       persistentFooterButtons: <Widget>[
         Text('$createdAt by $createdBy'),
+        (canDelete)?
         IconButton(
           icon: Icon(Icons.delete_forever),
           onPressed: () => delete(),
-        ),
+        ):null,
       ],
     );
   }
   void delete() {
     var key = notificationSelection['key'];
+    //var course = notificationSelection['course'];
     dbRef.child('Discussion/Discussion/notifications/$key').remove();
-    dbRef.child('usersdiscussion/$userID/Discussion/notifications/$key').remove();
+    var nRef = dbRef.child('usersdiscussion/$userID/Discussion/notifications/');
 
 
 

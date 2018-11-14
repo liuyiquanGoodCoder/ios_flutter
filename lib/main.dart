@@ -9,7 +9,8 @@ import 'discussion_list.dart';
 import 'discussion_create.dart';
 import 'discussion_view.dart';
 import 'personal_list.dart';
-
+import 'introduction.dart';
+import 'personal_view.dart';
 
 
 
@@ -42,8 +43,12 @@ class MyApp extends StatelessWidget {
             (BuildContext context) => discussionListPage(),
         '/discussionView':
             (BuildContext context) => DiscussionViewPage(),
+        '/personalView':
+            (BuildContext context) => PersonalViewPage(),
         '/personalList':
             (BuildContext context) => personalListPage(),
+        '/introduction':
+            (BuildContext context) => IntroductionlistPage(),
       },
     );
   }

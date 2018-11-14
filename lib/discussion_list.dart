@@ -27,18 +27,16 @@ class NotificationListState extends State {
       roleSet = Set();
       courseSet = Set();
     }
-    courseSet.add('18446396');
-    //courseSet.add('18414850');
-      for (var c in users.keys) {
-        //var id = roles[c];
-        var nRef = dbRef.child('usersdiscussion/$c/Discussion/notifications');
-        nRef.onValue.listen((event) {
-          if (event.snapshot.value == null) nMap.remove(c);
-          else nMap[c] = (event.snapshot.value as Map).values.toList();
-          if (mounted) setState(() {});
-        });
-
-
+    courseSet.add('Discussion');
+    // canCreate = roleSet.contains('teacher') null
+    //  || roleSet.contains('administrator');
+    for (var c in courseSet) {
+      var nRef = dbRef.child('Discussion/$c/notifications');
+      nRef.onValue.listen((event) {
+        if (event.snapshot.value == null) nMap.remove(c);
+        else nMap[c] = (event.snapshot.value as Map).values.toList();
+        if (mounted) setState(() {});
+      });
 
       print(c);
     }
@@ -68,8 +66,7 @@ class NotificationListState extends State {
       widgetList.add(
           ListTile(
               leading: Icon(Icons.notifications),
-// title: Text('Item $i'),
-// trailing: Icon(Icons.face),
+
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
@@ -78,8 +75,6 @@ class NotificationListState extends State {
                     style: TextStyle(fontSize: 10.0, color: Colors.blueGrey),),
                 ],
               ),
-//              trailing: Text(course.replaceAll(' ', '\n'),
-//                textAlign: TextAlign.right,),
 
               onTap: () {
 
@@ -97,7 +92,8 @@ class NotificationListState extends State {
       //) : null,
 
 
-      appBar: AppBar(title: Text('Notifications'),),
+      appBar: AppBar(title: Text('Discussion',style:TextStyle(fontSize: 35.0,color:Colors.black,
+        fontFamily: 'marker felt',),),backgroundColor: Colors.amberAccent,),
       body: ListView(
         children: widgetList,
         padding: EdgeInsets.all(20.0),
