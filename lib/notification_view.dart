@@ -50,8 +50,9 @@ class NotificationViewState extends State {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
-      ),
+        title: Text(title,style:TextStyle(fontSize: 35.0,color:Colors.black,
+      fontFamily: 'marker felt',),),backgroundColor: Colors.amberAccent,),
+
       body: ListView(
         padding: EdgeInsets.all(20.0),
         children: <Widget>[

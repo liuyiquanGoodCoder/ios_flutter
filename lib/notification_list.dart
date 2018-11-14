@@ -14,7 +14,6 @@ class NotificationListState extends State {
   @override
   void initState() {
     super.initState();
-    //getUsers().then((_) => getNotificationList());
     getRoles().then((_) => getNotificationList());
   }
 
@@ -28,19 +27,17 @@ class NotificationListState extends State {
       roleSet = Set();
       courseSet = Set();
     }
-    courseSet.add('ALL');
-    courseSet.add('COMP 7510');
     courseSet.add('teacher');
+    courseSet.add('COMP 7510');
     canCreate = roleSet.contains('teacher')
         || roleSet.contains('administrator');
     for (var c in courseSet) {
-      var nRef = dbRef.child('courses/$c/notifications');
+     var nRef = dbRef.child('courses/$c/notifications');
       nRef.onValue.listen((event) {
         if (event.snapshot.value == null) nMap.remove(c);
         else nMap[c] = (event.snapshot.value as Map).values.toList();
         if (mounted) setState(() {});
       });
-
       print(c);
     }
   }
@@ -76,7 +73,7 @@ class NotificationListState extends State {
                 children: <Widget>[
                   Text(title, style: TextStyle(fontWeight: FontWeight.bold),),
                   Text(createdAt,
-                    style: TextStyle(fontSize: 10.0, color: Colors.blueGrey),),
+                    style: TextStyle(fontSize: 10.0, color: Colors.black),),
                 ],
               ),
               trailing: Text(course.replaceAll(' ', '\n'),
@@ -96,12 +93,14 @@ class NotificationListState extends State {
     return Scaffold(
       floatingActionButton: (canCreate)?
       FloatingActionButton(
-        child: Icon(Icons.add),
+        child: Icon(Icons.add,color:Colors.black),backgroundColor: Colors.amberAccent,
         onPressed: ()=>Navigator.pushNamed(context, '/notificationCreate'),
       ) : null,
 
 
-      appBar: AppBar(title: Text('Notifications'),),
+      appBar: AppBar(
+        backgroundColor: Colors.amberAccent,title: Text('Notification',style:TextStyle(fontSize: 35.0,color:Colors.black,
+    fontFamily: 'marker felt'),),),
       body: ListView(
         children: widgetList,
         padding: EdgeInsets.all(20.0),

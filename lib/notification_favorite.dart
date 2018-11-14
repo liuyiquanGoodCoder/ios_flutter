@@ -91,11 +91,13 @@ class NotificationListState extends State {
       );
     }
     return Scaffold(
-      floatingActionButton: (canCreate)? FloatingActionButton(child: Icon(Icons.add), onPressed: ()=>Navigator.pushNamed(context, '/notificationCreate'),
+      floatingActionButton: (canCreate)? FloatingActionButton(child: Icon(Icons.add,color:Colors.black),
+        onPressed: ()=>Navigator.pushNamed(context, '/notificationCreate'),
       ) : null,
 
 
-      appBar: AppBar(title: Text('Notifications'),),
+      appBar: AppBar(backgroundColor: Colors.amberAccent,title: Text('Personal',style:TextStyle(fontSize: 35.0,color:Colors.black,
+    fontFamily: 'marker felt'),),),
       body: ListView(
         children: widgetList,
         padding: EdgeInsets.all(20.0),

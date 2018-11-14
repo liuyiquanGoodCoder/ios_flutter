@@ -19,9 +19,10 @@ class HomeState extends State {
       return splashScreen();
   }
 
+
   Widget splashScreen() {
-    var title = 'iBeauty';
-    var content = '\n\nEnjoy your shopping!\n\n';
+    var title = 'Reach';
+    var content = '\n\nenjoy your study ^ ^!\n\n';
     return Scaffold(
       backgroundColor: Colors.amberAccent,
         appBar: null,
@@ -37,7 +38,7 @@ class HomeState extends State {
               Text(content, style: TextStyle(fontSize: 20.0, fontFamily:
               'krungthep'), textAlign: TextAlign.center,),
               IconButton(
-                icon: Icon(Icons.add_shopping_cart),
+                icon: Icon(Icons.import_contacts),
                 iconSize: 128.0,
                   onPressed: () => signIn(context).then((success){
                     if (success) setState((){});
@@ -52,7 +53,7 @@ class HomeState extends State {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amberAccent,
-        title: Text('iBeauty',style:TextStyle(fontSize: 35.0,color:Colors.black,
+        title: Text('Reach',style:TextStyle(fontSize: 35.0,color:Colors.black,
             fontFamily: 'marker felt')),
 
         actions: <Widget>[
@@ -109,9 +110,9 @@ class HomeState extends State {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(Icons.favorite, size: 48.0, color: Colors.white,),
+                Icon(Icons.account_balance, size: 48.0, color: Colors.white,),
 
-                Text('Shopping',
+                Text('Introduction',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20.0, color: Colors.white),
                 ),
@@ -120,14 +121,14 @@ class HomeState extends State {
             ),
             color: Colors.deepOrange ,
             onPressed:
-                () => Navigator.pushNamed(context, '/notificationList'),
+                () => Navigator.pushNamed(context, '/introduction'),
           ),
 
           FlatButton(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(Icons.add_shopping_cart, size: 48.0, color: Colors.white,),
+                Icon(Icons.chat, size: 48.0, color: Colors.white,),
 
                 Text('Personal',
                   textAlign: TextAlign.center,
