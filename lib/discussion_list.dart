@@ -37,7 +37,6 @@ class NotificationListState extends State {
         else nMap[c] = (event.snapshot.value as Map).values.toList();
         if (mounted) setState(() {});
       });
-
       print(c);
     }
   }
